@@ -21,6 +21,10 @@ export default class Board {
         this.board[square.row][square.col] = piece;
     }
 
+    deletePiece(square) {
+        this.board[square.row][square.col] = undefined;
+    }
+
     getPiece(square) {
         return this.board[square.row][square.col];
     }
@@ -40,7 +44,8 @@ export default class Board {
         const movingPiece = this.getPiece(fromSquare);        
         if (!!movingPiece && movingPiece.player === this.currentPlayer) {
             this.setPiece(toSquare, movingPiece);
-            this.setPiece(fromSquare, undefined);
+            this.deletePiece(fromSquare);
+            movingPiece.firstMove = false;
             this.currentPlayer = (this.currentPlayer === Player.WHITE ? Player.BLACK : Player.WHITE);
         }
     }
