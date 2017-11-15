@@ -46,8 +46,26 @@ export default class Board {
     }
 
     movePiece(fromSquare, toSquare) {
-        const movingPiece = this.getPiece(fromSquare);        
+        const movingPiece = this.getPiece(fromSquare);
         if (!!movingPiece && movingPiece.player === this.currentPlayer) {
+            for (let row = 0; row < this.boardSize; ++row) {
+                for (let col = 0; col < this.boardSize; ++col) {
+                    let checkPiece = this.getPiece(Square.at(row, col));
+                    if (checkPiece) {
+                        checkPiece.movedLastTurn = false;
+                    }
+                }
+            }
+            if (movingPiece.constructor.name === 'Pawn') {
+                if (Math.abs(toSquare.row - fromSquare.row) === 2) {
+                    movingPiece.pawnLastMoveWasDouble = true;
+                }
+                else {
+                    movingPiece.pawnLastMoveWasDouble = false;
+                }
+            }
+            movingPiece.movedLastTurn = true;
+            movingPiece.moves++;
             this.setPiece(toSquare, movingPiece);
             this.deletePiece(fromSquare);
             movingPiece.firstMove = false;

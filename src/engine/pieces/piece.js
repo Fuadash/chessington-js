@@ -2,7 +2,9 @@ export default class Piece {
     constructor(player) {
         this.player = player;
         this.currentSquare ="who cares lmao";
-        this.firstMove = true;
+        this.moves = 0;
+        this.movedLastTurn = false;
+        this.pawnLastMoveWasDouble = false;
     }
 
     getAvailableMoves(board) {
