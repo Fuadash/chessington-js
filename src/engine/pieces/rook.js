@@ -6,7 +6,7 @@ export default class Rook extends Piece {
         super(player);
     }
 
-    getAvailableMoves(board) {
+    getCandidateMoves(board) {
         return [0,1,2,3,4,5,6,7].filter(x => x !== this.currentSquare.col).map(x => new Square(this.currentSquare.row, x)).concat(
             [0,1,2,3,4,5,6,7].filter(x => x !== this.currentSquare.row).map(x => new Square(x, this.currentSquare.col))
         );

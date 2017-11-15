@@ -7,15 +7,14 @@ export default class Pawn extends Piece {
         super(player);
     }
 
-    getAvailableMoves(board) {
+    getCandidateMoves(board) {
         let availableMoves = [];
-        if (this.player === Player.WHITE) {
-            if (this.firstMove){availableMoves.push(this.currentSquare.shiftedBy(2, 0))}
-            availableMoves.push(this.currentSquare.shiftedBy(1, 0));
-        }
-        else{
-            if (this.firstMove){availableMoves.push(this.currentSquare.shiftedBy(-2, 0))}
-            availableMoves.push(this.currentSquare.shiftedBy(-1, 0));
+        let factor = this.player === Player.WHITE ? 1 : -1;
+        if (!board.getPiece(this.currentSquare.shiftedBy(factor, 0))) {
+            if (this.firstMove) {
+                availableMoves.push(this.currentSquare.shiftedBy(2 * factor, 0));
+            }
+            availableMoves.push(this.currentSquare.shiftedBy(factor, 0));
         }
         return availableMoves;
     }
