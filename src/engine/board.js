@@ -13,7 +13,12 @@ export default class Board {
         for (let i = 0; i < board.length; i++) {
             board[i] = new Array(GameSettings.BOARD_SIZE);
         }
+        this.boardSize = GameSettings.BOARD_SIZE;
         return board;
+    }
+
+    squareIsOnBoard(square) {
+        return square.row > -1 && square.row < this.boardSize && square.col > -1 && square.col < this.boardSize;
     }
 
     setPiece(square, piece) {

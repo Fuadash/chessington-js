@@ -16,6 +16,11 @@ export default class Square {
         return `Row ${this.row}, Col ${this.col}`;
     }
 
+    shift(rowAmount, colAmount) {
+        this.row += rowAmount,
+        this.col += colAmount;
+    }
+
     shiftedBy(rowAmount, colAmount) {
         return new Square(this.row + rowAmount, this.col + colAmount);
     }
