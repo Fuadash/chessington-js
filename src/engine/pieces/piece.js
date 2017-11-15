@@ -15,14 +15,22 @@ export default class Piece {
         throw new Error('This method must be implemented, and return a list of available moves');
     }
 
-    static getBRQMoves(board, originSquare, directions){
+    static getBRQMoves(board, player, originSquare, directions){
         let candidates = [];
         directions.forEach(direction => {
             let change = [direction[0], direction[1]];
             while (true) {
                 let checkSquare = originSquare.shiftedBy(change[0], change[1]);
                 if (!board.squareIsOnBoard(checkSquare)) break;
-                if (board.getPiece(checkSquare)) break;
+                let checkPiece = board.getPiece(checkSquare);
+                if (checkPiece) {
+                    if (checkPiece.player !== player) {
+                        if (checkPiece.constructor.name !== 'King') {
+                            candidates.push(checkSquare);
+                        }
+                    }
+                    break;
+                };
                 candidates.push(checkSquare);
                 change[0] += direction[0];
                 change[1] += direction[1];

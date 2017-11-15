@@ -6,8 +6,8 @@ export default class Rook extends Piece {
         super(player);
     }
 
-    getCandidateMoves(board) {
-        return Piece.getBRQMoves(board, this.currentSquare, [[1, 0], [0, 1], [-1, 0], [0, -1]]);
+    getAvailableMoves(board) {
+        return Piece.getBRQMoves(board, this.player, this.currentSquare, [[1, 0], [0, 1], [-1, 0], [0, -1]]);
     }
 
     getLongFunction(board, directions) {
