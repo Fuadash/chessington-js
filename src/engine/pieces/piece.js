@@ -1,5 +1,3 @@
-import Square from '../square';
-
 export default class Piece {
     constructor(player) {
         this.player = player;
@@ -34,6 +32,27 @@ export default class Piece {
                 candidates.push(checkSquare);
                 change[0] += direction[0];
                 change[1] += direction[1];
+            }
+        });
+        return candidates;
+    }
+
+    static getKMoves(board, player, originSquare, offsets) {
+        let candidates = [];
+        offsets.forEach(offset => {
+            let checkSquare = originSquare.shiftedBy(offset[0], offset[1]);
+            if (board.squareIsOnBoard(checkSquare)) {
+                let checkPiece = board.getPiece(checkSquare);
+                if (checkPiece) {
+                    if (checkPiece.player !== player) {
+                        if (checkPiece.constructor.name !== 'King') {
+                            candidates.push(checkSquare);
+                        }
+                    }
+                }
+                else {
+                    candidates.push(checkSquare);
+                }
             }
         });
         return candidates;
