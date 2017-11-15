@@ -17,6 +17,7 @@ export default class Board {
     }
 
     setPiece(square, piece) {
+        piece.currentSquare = square;
         this.board[square.row][square.col] = piece;
     }
 

@@ -15,4 +15,8 @@ export default class Square {
     toString() {
         return `Row ${this.row}, Col ${this.col}`;
     }
+
+    shiftedBy(rowAmount, colAmount) {
+        return new Square(this.row + rowAmount, this.col + colAmount);
+    }
 }

@@ -1,6 +1,7 @@
 export default class Piece {
     constructor(player) {
         this.player = player;
+        this.currentSquare ="who cares lmao";
     }
 
     getAvailableMoves(board) {
@@ -8,7 +9,6 @@ export default class Piece {
     }
 
     moveTo(board, newSquare) {
-        const currentSquare = board.findPiece(this);
-        board.movePiece(currentSquare, newSquare);
+        board.movePiece(this.currentSquare, newSquare);
     }
 }
